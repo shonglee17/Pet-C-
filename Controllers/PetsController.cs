@@ -124,7 +124,14 @@ namespace pet_hotel.Controllers
             // Save the changes to the database
             _context.SaveChanges();
 
-            return Ok(); // return a 200 OK status code to indicate success
+            Pet updatedPet = _context.Pets.Find(id);
+
+            if (updatedPet == null)
+            {
+                return NotFound(); // return a 404 Not Found if the pet doesn't exist
+            }
+
+            return Ok(updatedPet); // return a 200 OK status code to indicate success
         }
 
 
